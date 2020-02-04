@@ -4,7 +4,6 @@ sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポ�
 sys.path.append("../../../dataset")  # 親ディレクトリのファイルをインポートするための設定
 import numpy as np
 import pickle
-import matplotlib.pyplot as plt
 from fruits import load_fruits
 from deep_convnet import DeepConvNet
 from common.trainer import Trainer

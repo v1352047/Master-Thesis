@@ -2,13 +2,19 @@
 import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 sys.path.append("../../../dataset")  # 親ディレクトリのファイルをインポートするための設定
-import numpy as np
-import matplotlib.pyplot as plt
 from vehicles import load_vehicles
 from deep_convnet import DeepConvNet
 from common.trainer import Trainer
 
 (x_train, t_train), (x_test, t_test) = load_vehicles(flatten=False)
+
+#GPUのメモリにデータを移動
+x_train = to_gpu(x_train)
+t_train = to_gpu(t_train)
+x_test = to_gpu(x_test)
+t_test = to_gpu(t_test)
+
+
 
 network = DeepConvNet()  
 trainer = Trainer(network, x_train, t_train, x_test, t_test,

@@ -2,14 +2,19 @@
 import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 sys.path.append("../../../dataset")  # 親ディレクトリのファイルをインポートするための設定
-import numpy as np
+import cupy as cp
 import pickle
-import matplotlib.pyplot as plt
 from vehicles import load_vehicles
 from deep_convnet import DeepConvNet
 from common.trainer import Trainer
 
 (x_train, t_train), (x_test, t_test) = load_vehicles(flatten=False)
+
+#GPUのメモリにデータを移動
+x_train = to_gpu(x_train)
+t_train = to_gpu(t_train)
+x_test = to_gpu(x_test)
+t_test = to_gpu(t_test)
 
 with open('wrong-list.pkl', 'rb') as f:
     wrong_list = pickle.load(f)
@@ -27,8 +32,8 @@ t_train = [value for key, value in enumerate(t_train) if not(key in wrong_list)]
 
 
 #このリストをndarrayに変換
-x_train = np.array(x_train)
-t_train = np.array(t_train)
+x_train = cp.array(x_train)
+t_train = cp.array(t_train)
 
 
 

@@ -2,7 +2,6 @@
 import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 sys.path.append("../../../dataset")  # 親ディレクトリのファイルをインポートするための設定
-import numpy as np
 import matplotlib.pyplot as plt
 from fruits import load_fruits
 from deep_convnet import DeepConvNet
@@ -14,6 +13,12 @@ from common.trainer import Trainer
 #データの選別
 x_train = x_train[: 5000]
 t_train = t_train[: 5000]
+
+#GPUのメモリにデータを移動
+x_train = to_gpu(x_train)
+t_train = to_gpu(t_train)
+x_test = to_gpu(x_test)
+t_test = to_gpu(t_test)
 
 
 network = DeepConvNet()  

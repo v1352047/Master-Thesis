@@ -17,6 +17,15 @@ config.GPU = True
 
 (x_train, t_train), (x_test, t_test) = load_fruits(flatten=False)
 
+
+
+#GPUのメモリにデータを移動
+x_train = to_gpu(x_train)
+t_train = to_gpu(t_train)
+x_test = to_gpu(x_test)
+t_test = to_gpu(t_test)
+
+
 network = DeepConvNet()  
 trainer = Trainer(network, x_train, t_train, x_test, t_test,
                   epochs=20, mini_batch_size=20,

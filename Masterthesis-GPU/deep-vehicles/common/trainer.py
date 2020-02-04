@@ -2,6 +2,7 @@
 import sys, os
 sys.path.append(os.pardir)  # 親ディレクトリのファイルをインポートするための設定
 import cupy as cp
+from .util import to_cpu, to_gpu
 from common.optimizer import *
 
 class Trainer:
@@ -40,13 +41,14 @@ class Trainer:
         batch_mask = cp.random.choice(self.train_size, self.batch_size)
         x_batch = self.x_train[batch_mask]
         t_batch = self.t_train[batch_mask]
-        
+
+
         grads = self.network.gradient(x_batch, t_batch)
         self.optimizer.update(self.network.params, grads)
         
         loss = self.network.loss(x_batch, t_batch)
         self.train_loss_list.append(loss)
-        if self.verbose: print("train loss:" + str(loss))
+        #if self.verbose: print("train loss:" + str(loss))
         
         if self.current_iter % self.iter_per_epoch == 0:
             self.current_epoch += 1
@@ -59,7 +61,7 @@ class Trainer:
                 x_test_sample, t_test_sample = self.x_test[:t], self.t_test[:t]
                 
             train_acc = self.network.accuracy(x_train_sample, t_train_sample, batch_size=self.batch_size)
-            test_acc = self.network.accuracy(x_test_sample, t_test_sample)
+            test_acc = self.network.accuracy(x_test_sample, t_test_sample, batch_size=self.batch_size)
             self.train_acc_list.append(train_acc)
             self.test_acc_list.append(test_acc)
 
