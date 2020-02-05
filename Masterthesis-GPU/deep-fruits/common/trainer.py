@@ -72,7 +72,7 @@ class Trainer:
         for i in range(self.max_iter):
             self.train_step()
 
-        test_acc = self.network.accuracy(self.x_test, self.t_test)
+        test_acc = self.network.accuracy(self.x_test, self.t_test, batch_size=self.batch_size)
 
         if self.verbose:
             print("=============== Final Test Accuracy ===============")
