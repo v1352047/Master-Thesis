@@ -8,6 +8,13 @@ from fruits import load_fruits
 from deep_convnet import DeepConvNet
 from common.trainer import Trainer
 
+
+#GPUで実行する場合は、下記のコメントアウトを消去（要cupy）
+#===============================================
+config.GPU = True
+#===============================================
+
+
 (x_train, t_train), (x_test, t_test) = load_fruits(flatten=False)
 
 
