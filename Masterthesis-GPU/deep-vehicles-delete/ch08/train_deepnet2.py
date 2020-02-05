@@ -18,7 +18,7 @@ t_train = to_gpu(t_train)
 x_test = to_gpu(x_test)
 t_test = to_gpu(t_test)
 
-with open('wrong-list.pkl', 'rb') as f:
+with open('wrong-list-vehicles-huge.pkl', 'rb') as f:
     wrong_list = pickle.load(f)
 
 
