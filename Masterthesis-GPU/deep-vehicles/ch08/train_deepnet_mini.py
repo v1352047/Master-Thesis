@@ -22,8 +22,8 @@ t_train = to_gpu(t_train)
 x_test = to_gpu(x_test)
 t_test = to_gpu(t_test)
 
-x_train = x_train[: 2714]
-t_train = t_train[: 2714]
+x_train = x_train[: 5291]
+t_train = t_train[: 5291]
 
 
 network = DeepConvNet()  
